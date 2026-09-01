@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 15px;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+
+/* Interaction polish — retains the established Evaluate palette and typography. */
+button, a, input, select, textarea {
+  transition-property: background-color, border-color, color, box-shadow, opacity, transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+button:not(:disabled), a[href], select { cursor: pointer; }
+button:not(:disabled):active { transform: translateY(1px); }
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364758b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .7rem center;
+  padding-right: 2.25rem !important;
+}
+
+select:hover, input:hover, textarea:hover { border-color: #cbd5e1; }
+
+tbody tr { transition: background-color 140ms ease, box-shadow 140ms ease; }
+
+
+/* Summary/KPI cards — subtle professional motion, no palette or typography changes. */
+.summary-card-interactive {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: transform 180ms cubic-bezier(.2,.7,.2,1), border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.summary-card-interactive::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(63,112,152,.065), rgba(72,179,157,.025) 52%, transparent 78%);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.summary-card-interactive:hover {
+  transform: translateY(-3px);
+  border-color: #98b8d1;
+  box-shadow: 0 12px 26px rgba(19,37,52,.09), 0 2px 6px rgba(19,37,52,.04);
+}
+
+.summary-card-interactive:hover::after { opacity: 1; }
+
+.summary-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: .6rem;
+  color: #64748b;
+  background: #f8fafc;
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms cubic-bezier(.2,.7,.2,1);
+}
+
+.summary-card-interactive:hover .summary-card-icon {
+  color: #254663;
+  background: #eef2ff;
+  transform: translateY(-1px) scale(1.04);
+}
+
+.summary-card-value {
+  transition: color 180ms ease, transform 180ms cubic-bezier(.2,.7,.2,1);
+}
+
+.summary-card-interactive:hover .summary-card-value {
+  color: #132534;
+  transform: translateY(-1px);
+}
+
+.summary-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  transition: color 180ms ease, gap 180ms cubic-bezier(.2,.7,.2,1);
+}
+
+.summary-card-interactive:hover .summary-card-link {
+  color: #254663;
+  gap: .5rem;
+}
+
+.summary-card-danger .summary-card-icon {
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+.summary-card-danger:hover {
+  border-color: #fca5a5;
+  box-shadow: 0 12px 26px rgba(185,28,28,.07), 0 2px 6px rgba(19,37,52,.035);
+}
+
+.summary-card-danger:hover .summary-card-icon {
+  color: #dc2626;
+  background: #fef2f2;
+}
+
+.metric-card-interactive {
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.metric-card-interactive:hover {
+  transform: translateY(-2px);
+  border-color: #c6d8e7;
+  background-color: #fff;
+  box-shadow: 0 7px 18px rgba(19,37,52,.065);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button, a, input, select, textarea, tbody tr, .summary-card-interactive, .summary-card-icon, .summary-card-value, .summary-card-link, .metric-card-interactive { transition: none !important; }
+  .summary-card-interactive:hover, .metric-card-interactive:hover { transform: none !important; }
+}
